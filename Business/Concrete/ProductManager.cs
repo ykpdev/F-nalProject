@@ -1,15 +1,19 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entites.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Business.Concrete
-{
+namespace Business.Concrete                                          //Business Code :İş kodu  
+{                                                                    //Validation:Doğrulama Kodu
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
@@ -19,14 +23,13 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
+        [ValidationAspect(typeof(ProductValidator))] //add metodunu productvalidatore göre doğrula 
         public IResult Add(Product product)
         {
-            if (product.ProductName.Length<2)
-            {
-                return new ErrorResult(Messages.ProductNameInvalid);
-            }
+           
+           
             _productDal.Add(product);
-            return new SuccessResult(Messages.ProductAdded);
+            return new SuccessResult(Messages.ProductAdded); 
         }
 
         public IDataResult<List<Product>> GetAll()

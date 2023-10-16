@@ -14,7 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+ 
 namespace WebAPI
 {
     public class Startup
@@ -30,7 +30,7 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddSingleton<IProductService,ProductManager>();
+            //services.AddSingleton<IProductService,ProductManager>();             Kendi Autofac yapýmýzý oluþturduk o yüzden buradaki kodlara gerek kalmadý 
             //services.AddSingleton<IProductDal, EfProductDal>();
         }
 
